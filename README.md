@@ -26,5 +26,5 @@
   - In backend-secure-chat
     - Run the server:
       ```
-      npx ts-node src/server.ts
+      npm start
       ```
