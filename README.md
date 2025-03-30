@@ -7,7 +7,6 @@
       npm install
       ```
   - Generate private key and public key at root folder
-  - ***You must have openssl***
     - Run this 2 commands
       ```
       openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048
@@ -15,7 +14,8 @@
       ```
       openssl rsa -pubout -in private.pem -out public.pem
       ```
-  - Copy the key to the .env file in both frontend and backend
+  - Copy the key to the .env file in both frontend and backend folder
+  - In .env file, Frontend use ``` VITE_PUBLIC_KEY ``` and Backend use ``` PRIVATE_KEY ```
 
 ## Executing the Code
   - In frontend-secure-chat
