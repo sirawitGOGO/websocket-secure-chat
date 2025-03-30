@@ -15,7 +15,7 @@
       openssl rsa -pubout -in private.pem -out public.pem
       ```
   - Copy the key to the .env file in both frontend and backend folder
-  - In .env file, Frontend use ``` VITE_PUBLIC_KEY ``` and Backend use ``` PRIVATE_KEY ```
+  - In .env file, Frontend use ``` VITE_PUBLIC_KEY ``` variable and Backend use ``` PRIVATE_KEY ``` variable.
 
 ## Executing the Code
   - In frontend-secure-chat
