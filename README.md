@@ -7,6 +7,7 @@
       npm install
       ```
   - Generate private key and public key at root folder
+  - ***You must have openssl***
     - Run this 2 commands
       ```
       openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048
