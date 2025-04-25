@@ -62,6 +62,7 @@ wss.on("connection", (ws) => {
       if (parsed.type === "join") {
         activeUsername = parsed.username;
         ws.send(`✅ Welcome, ${activeUsername}!`);
+        console.log(`👋 ${activeUsername} has join the server`)
       } else if (parsed.type === "message") {
         const decryptedMessage = crypto.privateDecrypt(
           { key: serverPrivateKey, oaepHash: "sha256" },
@@ -71,6 +72,7 @@ wss.on("connection", (ws) => {
         console.log(`📩 ${activeUsername}: ${decryptedMessage}`);
       } else if (parsed.type === "exit") {
         ws.send("👋 You have exited the chat.");
+        console.log(`👋 ${activeUsername} disconnected`)
         ws.close();
       }
     } catch (err) {

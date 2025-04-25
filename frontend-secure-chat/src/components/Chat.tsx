@@ -19,33 +19,32 @@ export default function Chat() {
 
     ws.onmessage = async (event) => {
       try {
-        const data = JSON.parse(event.data);
-
-        if (data.type === "public_key") {
-          const keyBase64 = data.key;
-          const signatureBase64 = data.signature;
-
-          const verified = await verifyPublicKey(keyBase64, signatureBase64);
-          if (!verified) {
-            alert("❌ Invalid server signature. Connection not trusted.");
-            ws.close();
-            return;
-          }
-
-          const importedKey = await importPublicKey(keyBase64);
-          setPublicKey(importedKey);
-
-          // Send username after verification
-          ws.send(JSON.stringify({ type: "join", username }));
-          return;
-        }
-
         if (event.data === "Server is in use") {
           alert("🚫 Another user is currently using the chat.");
           ws.close();
           setSocket(null);
           setIsConnected(false);
           return;
+        } else {
+          const data = JSON.parse(event.data);
+          if (data.type === "public_key") {
+            const keyBase64 = data.key;
+            const signatureBase64 = data.signature;
+  
+            const verified = await verifyPublicKey(keyBase64, signatureBase64);
+            if (!verified) {
+              alert("❌ Invalid server signature. Connection not trusted.");
+              ws.close();
+              return;
+            }
+  
+            const importedKey = await importPublicKey(keyBase64);
+            setPublicKey(importedKey);
+  
+            // Send username after verification
+            ws.send(JSON.stringify({ type: "join", username }));
+            return;
+          }
         }
 
         setChatLog((prev) => [...prev, `🔹 Server: ${event.data}`]);
